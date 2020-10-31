@@ -1,17 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import Admin from "./layouts/Admin";
+import Login from "./layouts/Login";
+import AuthState from "./context/auth/AuthState";
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AuthState>
+       <Router>
+        <Switch>
+          <Route path="/admin"  component={Admin} />
+          <Route path="/login" component={Login} />
+          <Redirect from="/" to="/admin/dashboard" />
+        </Switch>
+      </Router>
+    </AuthState>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
