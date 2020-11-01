@@ -3,10 +3,11 @@ import styles from './login.module.scss';
 import {FaUserSecret, FaLock, FaBalanceScale} from 'react-icons/fa';
 import {motion} from 'framer-motion';
 import AuthContext from '../context/auth/authContext';
-const Login = () => {
+import {FaSpinner} from 'react-icons/fa';
+const Login = (props) => {
     
     const authContext = useContext(AuthContext);
-    const {login} = authContext;
+    const {login,loading,errors} = authContext;
 
     const [loginInfo,setLoginInfo] = useState({email:'',password:''});
 
@@ -14,9 +15,11 @@ const Login = () => {
         setLoginInfo({...loginInfo,[e.target.name]:e.target.value});
     }
 
-    const loginClickHandler = (e) => {
+    const loginClickHandler =async (e) => {
         e.preventDefault();
-        login(loginInfo);
+        await login(loginInfo);
+        props.history.push('/');
+
     }
     return (
         <div className={styles.login}>
@@ -46,9 +49,12 @@ const Login = () => {
                         <span className={styles.input_bar}></span>
                         <FaLock className={styles.icon_input} /> 
                     </div>
+                    {errors &&  <span class={styles.error}>{errors instanceof Array ? errors[0].msg : errors}</span>}
+                   
                     <div className={styles.form__group}>
-                        <button type="submit" >LOGIN</button>
+                        <button type="submit" > {loading ?  <FaSpinner /> : "LOGIN"} </button>
                     </div>
+
                 </form>
             </motion.div>
         </div>

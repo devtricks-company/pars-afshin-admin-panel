@@ -122,6 +122,20 @@
             }
 
         }
+
+        .error{
+            position: absolute;
+            color:white;
+            background-color: darkred;
+            display: inline-block;
+            width:80%;
+            padding:1rem 0;
+            top:115px;
+            margin: 0 auto;
+            left:calc(50% - 40%);
+            font-family: sans-serif;
+
+        }
     }
 
 }
