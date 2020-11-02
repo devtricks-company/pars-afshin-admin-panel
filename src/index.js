@@ -11,11 +11,13 @@ import {
 import Admin from "./layouts/Admin";
 import Login from "./layouts/Login";
 import AuthState from "./context/auth/AuthState";
+import StudentState from "./context/student/StudentState";
 
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthState>
+      <StudentState>
        <Router>
         <Switch>
           <Route path="/admin"  component={Admin} />
@@ -23,6 +25,7 @@ ReactDOM.render(
           <Redirect from="/" to="/admin/dashboard" />
         </Switch>
       </Router>
+      </StudentState>
     </AuthState>
   </React.StrictMode>,
   document.getElementById("root")
